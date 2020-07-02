@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A91E633324AE8D05003999B3 /* ArticleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A91E633224AE8D05003999B3 /* ArticleCell.swift */; };
 		A92DF28F24AE52A400D101FA /* ArticleManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A92DF28E24AE52A400D101FA /* ArticleManager.swift */; };
 		A9AEDEC324AA2B6C0030D595 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9AEDEC224AA2B6C0030D595 /* AppDelegate.swift */; };
 		A9AEDEC524AA2B6C0030D595 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9AEDEC424AA2B6C0030D595 /* SceneDelegate.swift */; };
@@ -30,6 +31,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		A91E633224AE8D05003999B3 /* ArticleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleCell.swift; sourceTree = "<group>"; };
 		A92DF28E24AE52A400D101FA /* ArticleManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleManager.swift; sourceTree = "<group>"; };
 		A9AEDEBF24AA2B6C0030D595 /* SosnovskiyProjectVTB.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SosnovskiyProjectVTB.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A9AEDEC224AA2B6C0030D595 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -119,6 +121,7 @@
 		A9AEDEE824AA2C780030D595 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				A91E633224AE8D05003999B3 /* ArticleCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -237,6 +240,7 @@
 				A9AEDEC724AA2B6C0030D595 /* ViewController.swift in Sources */,
 				A9AEDEC324AA2B6C0030D595 /* AppDelegate.swift in Sources */,
 				A9AEDEC524AA2B6C0030D595 /* SceneDelegate.swift in Sources */,
+				A91E633324AE8D05003999B3 /* ArticleCell.swift in Sources */,
 				A92DF28F24AE52A400D101FA /* ArticleManager.swift in Sources */,
 				A9AEDEED24AB83370030D595 /* Article.swift in Sources */,
 			);

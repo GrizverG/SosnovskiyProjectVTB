@@ -38,6 +38,7 @@ struct Article: Decodable {
     var imageURL: ImageURL = ImageURL()
     var header: String = ""
     var publicationDate: String = ""
+    var announce: String = ""
     var image: UIImage = UIImage(named: "backupImage")!
     
     var seldonURL: String {
@@ -54,6 +55,7 @@ struct Article: Decodable {
         case timeToRead = "timeOfReading"
         case sourceName
         case publicationDate = "date"
+        case announce
         case img
     }
     
@@ -64,12 +66,14 @@ struct Article: Decodable {
         let header = try container.decode(String.self, forKey: .header)
         let timeToRead = try container.decode(String.self, forKey: .timeToRead)
         let publicationDate = try container.decode(String.self, forKey: .publicationDate)
+        let announce = try container.decode(String.self, forKey: .announce)
         let sourceName = try container.decode(String.self, forKey: .sourceName)
         
         self.newsID = newsID
         self.header = prepareHeader(header)
         self.timeToRead = timeToRead
         self.publicationDate = preparePublicationDate(publicationDate)
+        self.announce = announce
         self.imageURL = try container.decode(ImageURL.self, forKey: .img)
         self.sourceName = sourceName
         

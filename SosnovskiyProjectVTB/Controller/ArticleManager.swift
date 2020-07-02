@@ -28,17 +28,23 @@ final public class ArticleManager {
     //
     // MARK: - Variables And Properties
     //
+    var viewController: ViewController
     var dataTask: URLSessionDataTask?
     private var articleArray: [Article] = []
     var ArticleArray: [Article] {
         get {
             return articleArray
         }
-        
         set(articles) {
             articleArray = articles
-            // #TODO: Update tableView
+            OperationQueue.main.addOperation {
+                self.viewController.refreshNewsTable()
+            }
         }
+    }
+    
+    init(viewController: ViewController) {
+        self.viewController = viewController
     }
     
     func updateNewsList(url: URL) {
