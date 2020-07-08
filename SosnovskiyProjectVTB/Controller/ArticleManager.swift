@@ -8,6 +8,11 @@
 
 import Foundation
 
+
+protocol RefreshDelegate: class {
+    func refresh()
+}
+
 // #MARK: Get URL
 public func getURL(index: Int, rubric: Int) -> URL {
     return URL(string: "https://news.myseldon.com/api/Section?rubricId=\(rubric)&pageSize=8&pageIndex=\(index)")!
@@ -28,7 +33,6 @@ final public class ArticleManager {
     //
     // MARK: - Variables And Properties
     //
-    var viewController: ViewController
     var dataTask: URLSessionDataTask?
     private var articleArray: [Article] = []
     var ArticleArray: [Article] {
@@ -37,15 +41,12 @@ final public class ArticleManager {
         }
         set(articles) {
             articleArray = articles
-            OperationQueue.main.addOperation {
-                self.viewController.refreshNewsTable()
-            }
+            delegate?.refresh()
         }
     }
     
-    init(viewController: ViewController) {
-        self.viewController = viewController
-    }
+    // MARK:- Delegate
+    weak var delegate: RefreshDelegate?
     
     func updateNewsList(url: URL) {
         
