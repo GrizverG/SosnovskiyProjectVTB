@@ -11,16 +11,18 @@ import Foundation
 
 final class NewsCell: UICollectionViewCell {
     
+    // MARK: - Properties
     private weak var newsImageView: UIImageView!
     private weak var newsHeaderLabel: UILabel!
     private weak var newsDescriptionLabel: UILabel!
     
     static var identifier: String = "ArticleCell"
 
-    struct Colors {
+    private struct Colors {
         static let backgroundFadingColor = UIColor(displayP3Red: 0.1, green: 0.1, blue: 0.1, alpha: 0.6)
     }
     
+    // MARK: - NewsCell init
     override init(frame: CGRect) {
         super.init(frame: frame)
 
@@ -41,7 +43,8 @@ final class NewsCell: UICollectionViewCell {
         newsDescriptionLabel.text = article.announce
     }
     
-    func setupImage() {
+    // MARK: - newsImageView setup
+    private func setupImage() {
         let newsImageView = UIImageView()
         addSubview(newsImageView)
         newsImageView.translatesAutoresizingMaskIntoConstraints = false
@@ -55,7 +58,8 @@ final class NewsCell: UICollectionViewCell {
         self.newsImageView = newsImageView
     }
     
-    func setupHeader() {
+    // MARK: - newsHeaderLabel setup
+    private func setupHeader() {
         let newsHeaderLabel = UILabel()
         addSubview(newsHeaderLabel)
         newsHeaderLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -69,7 +73,8 @@ final class NewsCell: UICollectionViewCell {
         self.newsHeaderLabel = newsHeaderLabel
     }
     
-    func setupDescription() {
+    // MARK: - newsDescriptionLabel setup
+    private func setupDescription() {
         let newsDescriptionLabel = UILabel()
         addSubview(newsDescriptionLabel)
         newsDescriptionLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -84,6 +89,7 @@ final class NewsCell: UICollectionViewCell {
         self.newsDescriptionLabel = newsDescriptionLabel
     }
 
+    // MARK: - PrepareForUse
     override func prepareForReuse() {
         super.prepareForReuse()
         self.reset()
