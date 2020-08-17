@@ -11,7 +11,8 @@ import UIKit
 final class PopUpListController: UIViewController {
     
     override func viewDidLoad() {
-        let menuView = createDragerView()
+        let menuView = DragerView()
+        view.addSubview(menuView)
         menuView.pinLeft(to: view)
         menuView.pinRight(to: view)
         menuView.pinUp(to: view)

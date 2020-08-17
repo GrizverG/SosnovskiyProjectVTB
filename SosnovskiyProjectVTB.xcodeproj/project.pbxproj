@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		A90184B124D481E800DA8177 /* UIGradient.swift in Sources */ = {isa = PBXBuildFile; fileRef = A90184B024D481E800DA8177 /* UIGradient.swift */; };
 		A92AA4BB24E82E1F00DF7CAE /* PopUpListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A92AA4BA24E82E1F00DF7CAE /* PopUpListController.swift */; };
+		A92AA4C224EAD13300DF7CAE /* DragerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A92AA4C124EAD13300DF7CAE /* DragerView.swift */; };
 		A92DF28F24AE52A400D101FA /* ArticleManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A92DF28E24AE52A400D101FA /* ArticleManager.swift */; };
 		A9AE50F924D758CD009A8A9D /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9AE50F824D758CD009A8A9D /* WebViewController.swift */; };
 		A9AEDEC324AA2B6C0030D595 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9AEDEC224AA2B6C0030D595 /* AppDelegate.swift */; };
@@ -36,6 +37,7 @@
 /* Begin PBXFileReference section */
 		A90184B024D481E800DA8177 /* UIGradient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIGradient.swift; sourceTree = "<group>"; };
 		A92AA4BA24E82E1F00DF7CAE /* PopUpListController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpListController.swift; sourceTree = "<group>"; };
+		A92AA4C124EAD13300DF7CAE /* DragerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DragerView.swift; sourceTree = "<group>"; };
 		A92DF28E24AE52A400D101FA /* ArticleManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleManager.swift; sourceTree = "<group>"; };
 		A9AE50F824D758CD009A8A9D /* WebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
 		A9AEDEBF24AA2B6C0030D595 /* SosnovskiyProjectVTB.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SosnovskiyProjectVTB.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -129,6 +131,7 @@
 				A90184B024D481E800DA8177 /* UIGradient.swift */,
 				A9D0D21E24D5822500A8B5BA /* UIView+.swift */,
 				A9D0D22024D5D73900A8B5BA /* UIColor+.swift */,
+				A92AA4C124EAD13300DF7CAE /* DragerView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -255,6 +258,7 @@
 				A9AEDEED24AB83370030D595 /* Article.swift in Sources */,
 				A90184B124D481E800DA8177 /* UIGradient.swift in Sources */,
 				A9D0D22124D5D73900A8B5BA /* UIColor+.swift in Sources */,
+				A92AA4C224EAD13300DF7CAE /* DragerView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
