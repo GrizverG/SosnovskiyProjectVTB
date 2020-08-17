@@ -7,10 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		A91E633324AE8D05003999B3 /* ArticleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A91E633224AE8D05003999B3 /* ArticleCell.swift */; };
+		A90184B124D481E800DA8177 /* UIGradient.swift in Sources */ = {isa = PBXBuildFile; fileRef = A90184B024D481E800DA8177 /* UIGradient.swift */; };
+		A92AA4BB24E82E1F00DF7CAE /* PopUpListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A92AA4BA24E82E1F00DF7CAE /* PopUpListController.swift */; };
 		A92DF28F24AE52A400D101FA /* ArticleManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A92DF28E24AE52A400D101FA /* ArticleManager.swift */; };
+		A9AE50F924D758CD009A8A9D /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9AE50F824D758CD009A8A9D /* WebViewController.swift */; };
 		A9AEDEC324AA2B6C0030D595 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9AEDEC224AA2B6C0030D595 /* AppDelegate.swift */; };
-		A9AEDEC524AA2B6C0030D595 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9AEDEC424AA2B6C0030D595 /* SceneDelegate.swift */; };
 		A9AEDEC724AA2B6C0030D595 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9AEDEC624AA2B6C0030D595 /* ViewController.swift */; };
 		A9AEDECD24AA2B6C0030D595 /* SosnovskiyProjectVTB.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A9AEDECB24AA2B6C0030D595 /* SosnovskiyProjectVTB.xcdatamodeld */; };
 		A9AEDECF24AA2B700030D595 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A9AEDECE24AA2B700030D595 /* Assets.xcassets */; };
@@ -18,6 +19,8 @@
 		A9AEDEDD24AA2B700030D595 /* SosnovskiyProjectVTBTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9AEDEDC24AA2B700030D595 /* SosnovskiyProjectVTBTests.swift */; };
 		A9AEDEED24AB83370030D595 /* Article.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9AEDEEC24AB83370030D595 /* Article.swift */; };
 		A9CAE86124B9FE26003068AC /* NewsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9CAE86024B9FE26003068AC /* NewsCell.swift */; };
+		A9D0D21F24D5822500A8B5BA /* UIView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D0D21E24D5822500A8B5BA /* UIView+.swift */; };
+		A9D0D22124D5D73900A8B5BA /* UIColor+.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D0D22024D5D73900A8B5BA /* UIColor+.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -31,11 +34,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		A91E633224AE8D05003999B3 /* ArticleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleCell.swift; sourceTree = "<group>"; };
+		A90184B024D481E800DA8177 /* UIGradient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIGradient.swift; sourceTree = "<group>"; };
+		A92AA4BA24E82E1F00DF7CAE /* PopUpListController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpListController.swift; sourceTree = "<group>"; };
 		A92DF28E24AE52A400D101FA /* ArticleManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleManager.swift; sourceTree = "<group>"; };
+		A9AE50F824D758CD009A8A9D /* WebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
 		A9AEDEBF24AA2B6C0030D595 /* SosnovskiyProjectVTB.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SosnovskiyProjectVTB.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A9AEDEC224AA2B6C0030D595 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		A9AEDEC424AA2B6C0030D595 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		A9AEDEC624AA2B6C0030D595 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		A9AEDECC24AA2B6C0030D595 /* SosnovskiyProjectVTB.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = SosnovskiyProjectVTB.xcdatamodel; sourceTree = "<group>"; };
 		A9AEDECE24AA2B700030D595 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -46,6 +50,8 @@
 		A9AEDEDE24AA2B700030D595 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A9AEDEEC24AB83370030D595 /* Article.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Article.swift; sourceTree = "<group>"; };
 		A9CAE86024B9FE26003068AC /* NewsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsCell.swift; sourceTree = "<group>"; };
+		A9D0D21E24D5822500A8B5BA /* UIView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+.swift"; sourceTree = "<group>"; };
+		A9D0D22024D5D73900A8B5BA /* UIColor+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -91,7 +97,6 @@
 				A9AEDEE824AA2C780030D595 /* View */,
 				A9AEDEE924AA2C800030D595 /* Controller */,
 				A9AEDEC224AA2B6C0030D595 /* AppDelegate.swift */,
-				A9AEDEC424AA2B6C0030D595 /* SceneDelegate.swift */,
 				A9AEDECE24AA2B700030D595 /* Assets.xcassets */,
 				A9AEDED024AA2B700030D595 /* LaunchScreen.storyboard */,
 				A9AEDED324AA2B700030D595 /* Info.plist */,
@@ -120,8 +125,10 @@
 		A9AEDEE824AA2C780030D595 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				A91E633224AE8D05003999B3 /* ArticleCell.swift */,
 				A9CAE86024B9FE26003068AC /* NewsCell.swift */,
+				A90184B024D481E800DA8177 /* UIGradient.swift */,
+				A9D0D21E24D5822500A8B5BA /* UIView+.swift */,
+				A9D0D22024D5D73900A8B5BA /* UIColor+.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -131,6 +138,8 @@
 			children = (
 				A9AEDEC624AA2B6C0030D595 /* ViewController.swift */,
 				A92DF28E24AE52A400D101FA /* ArticleManager.swift */,
+				A9AE50F824D758CD009A8A9D /* WebViewController.swift */,
+				A92AA4BA24E82E1F00DF7CAE /* PopUpListController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -236,13 +245,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				A9AEDECD24AA2B6C0030D595 /* SosnovskiyProjectVTB.xcdatamodeld in Sources */,
+				A92AA4BB24E82E1F00DF7CAE /* PopUpListController.swift in Sources */,
 				A9AEDEC724AA2B6C0030D595 /* ViewController.swift in Sources */,
 				A9AEDEC324AA2B6C0030D595 /* AppDelegate.swift in Sources */,
-				A9AEDEC524AA2B6C0030D595 /* SceneDelegate.swift in Sources */,
-				A91E633324AE8D05003999B3 /* ArticleCell.swift in Sources */,
+				A9AE50F924D758CD009A8A9D /* WebViewController.swift in Sources */,
 				A92DF28F24AE52A400D101FA /* ArticleManager.swift in Sources */,
 				A9CAE86124B9FE26003068AC /* NewsCell.swift in Sources */,
+				A9D0D21F24D5822500A8B5BA /* UIView+.swift in Sources */,
 				A9AEDEED24AB83370030D595 /* Article.swift in Sources */,
+				A90184B124D481E800DA8177 /* UIGradient.swift in Sources */,
+				A9D0D22124D5D73900A8B5BA /* UIColor+.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -395,7 +407,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 3AKCU95WCN;
 				INFOPLIST_FILE = SosnovskiyProjectVTB/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -403,7 +417,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = GrizverG.SosnovskiyProjectVTB;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -412,7 +426,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 3AKCU95WCN;
 				INFOPLIST_FILE = SosnovskiyProjectVTB/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -420,7 +436,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = GrizverG.SosnovskiyProjectVTB;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

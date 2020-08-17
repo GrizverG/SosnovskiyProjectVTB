@@ -33,16 +33,17 @@ public struct ArticleList: Decodable {
 // #MARK: Article
 struct Article: Decodable {
     var newsID: Int = 0
-    var timeToRead: String = ""
-    var sourceName: String = ""
+    var timeToRead: String? = ""
+    var sourceName: String? = ""
     var imageURL: ImageURL = ImageURL()
-    var header: String = ""
-    var publicationDate: String = ""
-    var announce: String = ""
+    var header: String? = ""
+    var publicationDate: String? = ""
+    var announce: String? = ""
     var image: UIImage = UIImage(named: "backupImage")!
     
-    var seldonURL: String {
-        "https://news.myseldon.com/ru/news/index/\(newsID)?requestId=\(requestID)"
+    var seldonURL: URL {
+        let url = URL(string: "https://news.myseldon.com/ru/news/index/\(newsID)?requestId=\(requestID)")
+        return url!
     }
 
     enum imageKey: String, CodingKey {
@@ -63,16 +64,16 @@ struct Article: Decodable {
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         let newsID = try container.decode(Int.self, forKey: .newsId)
-        let header = try container.decode(String.self, forKey: .header)
-        let timeToRead = try container.decode(String.self, forKey: .timeToRead)
-        let publicationDate = try container.decode(String.self, forKey: .publicationDate)
-        let announce = try container.decode(String.self, forKey: .announce)
-        let sourceName = try container.decode(String.self, forKey: .sourceName)
+        let header = try container.decode(String?.self, forKey: .header)
+        let timeToRead = try container.decode(String?.self, forKey: .timeToRead)
+        let publicationDate = try container.decode(String?.self, forKey: .publicationDate)
+        let announce = try container.decode(String?.self, forKey: .announce)
+        let sourceName = try container.decode(String?.self, forKey: .sourceName)
         
         self.newsID = newsID
-        self.header = prepareHeader(header)
+        self.header = prepareHeader(header ?? "")
         self.timeToRead = timeToRead
-        self.publicationDate = preparePublicationDate(publicationDate)
+        self.publicationDate = preparePublicationDate(publicationDate ?? "")
         self.announce = announce
         self.imageURL = try container.decode(ImageURL.self, forKey: .img)
         self.sourceName = sourceName
@@ -89,11 +90,13 @@ struct Article: Decodable {
     
     // #TODO: Change language of the date
     private func preparePublicationDate(_ date: String) -> String {
-        // let dateFormatter = DateFormatter()
-        // dateFormatter.timeZone = .current
-        // dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss" //"2020-07-01T12:05:00"
-        // return "\(dateFormatter.date(from:date)!)"
-        return date
+        let dateFormatter = DateFormatter()
+        let preparedDate = date.split(separator: ".")
+        let date = preparedDate[0].description
+        
+        dateFormatter.timeZone = .current
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
+        return dateFormatter.date(from:date)?.description ?? ""
     }
     
     private func loadImage() -> UIImage? {

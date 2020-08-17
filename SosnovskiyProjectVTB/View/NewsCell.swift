@@ -11,25 +11,35 @@ import Foundation
 
 final class NewsCell: UICollectionViewCell {
     
-    // MARK: - Properties
-    private weak var newsImageView: UIImageView!
-    private weak var newsHeaderLabel: UILabel!
-    private weak var newsDescriptionLabel: UILabel!
+    // MARK: - Constants
+    private var newsImageView = UIImageView()
+    private let newsHeaderLabel = UILabel()
+    private let descriptionLabel = UILabel()
+    private var gradientView = UIGradient()
+    private var stackView = UIStackView()
+    private var infoView = UIView()
     
-    static var identifier: String = "ArticleCell"
-
-    private struct Colors {
-        static let backgroundFadingColor = UIColor(displayP3Red: 0.1, green: 0.1, blue: 0.1, alpha: 0.6)
+    static let identifier: String = "ArticleCell"
+    
+    private enum Constants {
+        static let headerFont = UIFont.systemFont(ofSize: 16, weight: .bold)
+        static let descriptionFont = UIFont.systemFont(ofSize: 14, weight: .medium)
     }
+
+    lazy var width: NSLayoutConstraint = {
+        let width = contentView.widthAnchor.constraint(equalToConstant: bounds.size.width)
+        width.isActive = true
+        return width
+    }()
     
     // MARK: - NewsCell init
     override init(frame: CGRect) {
         super.init(frame: frame)
 
-        setupImage()
-        setupHeader()
-        setupDescription()
-        
+        contentView.translatesAutoresizingMaskIntoConstraints = false
+        contentView.backgroundColor = .dark
+        loadCell()
+
         self.reset()
     }
 
@@ -37,67 +47,106 @@ final class NewsCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
+    private func loadCell() {
+        newsImageView.removeFromSuperview()
+        infoView.removeFromSuperview()
+        gradientView.removeFromSuperview()
+        stackView.removeFromSuperview()
+        newsHeaderLabel.removeFromSuperview()
+        descriptionLabel.removeFromSuperview()
+        setupImage()
+        setupGradient()
+        setupStackView()
+        setupLabel(label: newsHeaderLabel, font: Constants.headerFont, .mainColor)
+        setupLabel(label: descriptionLabel, font: Constants.descriptionFont, .white)
+    }
+    
+    // Mark setup cell
     func set(article: Article) {
         newsImageView.image = article.image
         newsHeaderLabel.text = article.header
-        newsDescriptionLabel.text = article.announce
+        descriptionLabel.text = article.announce
     }
     
-    // MARK: - newsImageView setup
+    // MARK: - Setup newsImageView
     private func setupImage() {
-        let newsImageView = UIImageView()
-        addSubview(newsImageView)
-        newsImageView.translatesAutoresizingMaskIntoConstraints = false
-        newsImageView.layer.cornerRadius = 15
-        newsImageView.clipsToBounds = true
-        newsImageView.contentMode = .scaleToFill
-        newsImageView.topAnchor.constraint(equalTo: self.topAnchor, constant: CGFloat(5)).isActive = true
-        newsImageView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: CGFloat(-5)).isActive = true
-        newsImageView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: CGFloat(5)).isActive = true
-        newsImageView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: CGFloat(-5)).isActive = true
-        self.newsImageView = newsImageView
+        newsImageView = UIImageView()
+        let imageView = newsImageView
+        contentView.addSubview(imageView)
+        imageView.layer.cornerRadius = 15
+        imageView.clipsToBounds = true
+        imageView.contentMode = .scaleAspectFill
+        imageView.heightAnchor.constraint(lessThanOrEqualToConstant: 400).isActive = true
+        imageView.resistShrinking(with: 2000, axis: .vertical)
+        
+        imageView.pin(to: contentView, 5)
     }
     
-    // MARK: - newsHeaderLabel setup
-    private func setupHeader() {
-        let newsHeaderLabel = UILabel()
-        addSubview(newsHeaderLabel)
-        newsHeaderLabel.translatesAutoresizingMaskIntoConstraints = false
-        newsHeaderLabel.numberOfLines = 0
-        newsHeaderLabel.font = UIFont.boldSystemFont(ofSize: 16)
-        newsHeaderLabel.textColor = .white
-        newsHeaderLabel.backgroundColor = Colors.backgroundFadingColor
-        newsHeaderLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: 130).isActive = true
-        newsHeaderLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 10).isActive = true
-        newsHeaderLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -10).isActive = true
-        self.newsHeaderLabel = newsHeaderLabel
+    // MARK: - Setup gradient
+    private func setupGradient() {
+        infoView = UIView()
+        newsImageView.addSubview(infoView)
+        infoView.pinLeft(to: newsImageView)
+        infoView.pinRight(to: newsImageView)
+        infoView.pinDown(to: newsImageView)
+        infoView.resistShrinking(with: 1000, axis: .vertical)
+        gradientView = UIGradient()
+        infoView.addSubview(gradientView)
+        gradientView.pin(to: infoView)
     }
     
-    // MARK: - newsDescriptionLabel setup
-    private func setupDescription() {
-        let newsDescriptionLabel = UILabel()
-        addSubview(newsDescriptionLabel)
-        newsDescriptionLabel.translatesAutoresizingMaskIntoConstraints = false
-        newsDescriptionLabel.numberOfLines = 0
-        newsDescriptionLabel.font = UIFont.systemFont(ofSize: 14)
-        newsDescriptionLabel.textColor = .white
-        newsDescriptionLabel.backgroundColor = Colors.backgroundFadingColor
-        newsDescriptionLabel.topAnchor.constraint(equalTo: newsHeaderLabel.bottomAnchor).isActive = true
-        newsDescriptionLabel.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -10).isActive = true
-        newsDescriptionLabel.leadingAnchor .constraint(equalTo: self.leadingAnchor, constant: 10).isActive = true
-        newsDescriptionLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -10).isActive = true
-        self.newsDescriptionLabel = newsDescriptionLabel
+    
+    //MARK: - Setup stack view
+    private func setupStackView() {
+        stackView = UIStackView()
+        infoView.addSubview(stackView)
+        
+        stackView.axis = .vertical
+        stackView.alignment = .center
+        stackView.spacing = 8
+        
+        stackView.pinDown(to: infoView, 5)
+        stackView.pinLeft(to: infoView, 5)
+        stackView.pinRight(to: infoView, 5)
+        stackView.pinHeight(to: infoView.heightAnchor, 0.45)
+        stackView.resistShrinking(with: 900, axis: .vertical)
+    }
+    
+     //  MARK: - Add to stack view
+    private func addToStackView(view: UIView) {
+        stackView.addArrangedSubview(view)
+        
+        view.pinLeft(to: stackView)
+        view.pinRight(to: stackView)
+        view.resistShrinking(with: 1000, axis: .vertical)
+    }
+    
+    // MARK: - Setup label
+    private func setupLabel(label: UILabel, font: UIFont, _ color: UIColor) {
+        label.font = font
+        label.numberOfLines = 0
+        label.textColor = color
+        label.textAlignment = .left
+
+        addToStackView(view: label)
     }
 
-    // MARK: - PrepareForUse
+    // MARK: - Prepare for use
     override func prepareForReuse() {
         super.prepareForReuse()
+        loadCell()
         self.reset()
     }
+    
+    override func systemLayoutSizeFitting(_ targetSize: CGSize, withHorizontalFittingPriority horizontalFittingPriority: UILayoutPriority, verticalFittingPriority: UILayoutPriority) -> CGSize {
+        width.constant = bounds.size.width
+        return contentView.systemLayoutSizeFitting(CGSize(width: targetSize.width, height: 1))
+    }
 
+    // MARK: - Reset
     func reset() {
-        self.newsHeaderLabel.textAlignment = .center
-        self.newsDescriptionLabel.textAlignment = .center
+        self.newsHeaderLabel.textAlignment = .left
+        self.descriptionLabel.textAlignment = .left
         self.newsImageView.image = nil
     }
 }
