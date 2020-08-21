@@ -17,26 +17,30 @@ enum Rubrics: Int {
     case main = 4
 }
 
-// #MARK: Get URL
+// MARK: - Get URL
+
 func getURL(index: Int, rubric: Int) -> URL {
+    
     return URL(string: "https://news.myseldon.com/api/Section?rubricId=\(rubric)&pageSize=8&pageIndex=\(index)")!
 }
 
 func getURL(task: String) -> URL{
+    
     return URL(string: "https://news.myseldon.com/news/search?text=\(task)")!
 }
 
 
 
 // MARK: - ArticleManager
+
 final public class ArticleManager {
     
-    //
     // MARK: - Constants
+    
     let defaultSession = URLSession(configuration: .default)
     
-    //
-    // MARK: - Variables And Properties
+    // MARK: - Properties
+    
     var dataTask: URLSessionDataTask?
     var isLoading = false
     var pageIndex = 1
@@ -55,27 +59,33 @@ final public class ArticleManager {
         }
     }
     
-    // MARK:- Delegate
+    // MARK: - Delegate
+    
     weak var delegate: RefreshDelegate?
     
+    // MARK: - Update news
     
     func updateNewsList() {
+        
         isLoading = true
         let url =  getURL()
         fetchNews(url: url)
     }
     
     func updateNewsList(url: URL) {
+        
         fetchNews(url: url, false)
     }
     
-    // #MARK: Get URL
+    // MARK: - Get URL
     private func getURL() -> URL {
+        
         return URL(string: "https://news.myseldon.com/api/Section?rubricId=\(rubric.rawValue)&pageSize=8&pageIndex=\(pageIndex)")!
     }
     
-    // MARK: - fetchNews
+    // MARK: - Fetch news
     private func fetchNews(url: URL, _ isAdding: Bool = true) {
+        
         dataTask?.cancel()
         dataTask = defaultSession.dataTask(with: url) { [weak self] data, response, error in
             defer {
@@ -96,6 +106,7 @@ final public class ArticleManager {
     
     // MARK: - Load news
     private func loadNews(_ data: Data, _ isAdding: Bool = true) {
+        
         let decoder = JSONDecoder()
         decoder.keyDecodingStrategy = .convertFromSnakeCase
         do {

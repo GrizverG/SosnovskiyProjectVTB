@@ -7,9 +7,13 @@
 //
 
 import UIKit
+
+// MARK: - Main view controller
+
 final class ViewController: UIViewController {
     
     // MARK: - Constants
+    
     private enum Constants {
         static let menuViewSpacing = 1
         static let menuViewHeight = 700
@@ -24,6 +28,7 @@ final class ViewController: UIViewController {
     }
     
     // MARK: - Properties
+    
     private var articleManager: ArticleManager!
     private var newsCollectionView: UICollectionView!
     private var menuView = UIView()
@@ -32,7 +37,6 @@ final class ViewController: UIViewController {
     private var settingsButton = UIButton(type: .system)
     private var menuButton = UIButton(type: .system)
     private var buttonStackView = UIStackView()
-    private var menuStackView = UIStackView()
     private var newView = UIView()
     private var constraint: NSLayoutConstraint?
     
@@ -45,30 +49,35 @@ final class ViewController: UIViewController {
         return layout
     }()
     
+    // MARK: - Life cycle
+    
     override func viewDidLoad() {
+        
         super.viewDidLoad()
         view.backgroundColor = .dark
         
         setupArticleManager()
         setupMenuBar()
         setupButtonStackView()
-        setupMenuStackView()
         setupCollectionView()
         fetchData()
     }
     
     private func fetchData() {
+        
         articleManager.updateNewsList(url: getURL(index: 1, rubric: 4))
     }
     
     // MARK: - Article Manager
     private func setupArticleManager() {
+        
         articleManager = ArticleManager()
         articleManager.delegate = self
     }
     
-    // MARK: - Menu bar setup
+    // MARK: - Menu bar set up
     private func setupMenuBar() {
+        
         view.addSubview(menuView)
         menuView.backgroundColor = .dark
         menuView.layer.borderWidth = Constants.menuViewBorderWidth
@@ -91,7 +100,9 @@ final class ViewController: UIViewController {
         newView.setHeight(to: 80)
     }
     
+    // MARK: - Button stackview set up
     private func setupButtonStackView() {
+        
         newView.addSubview(buttonStackView)
         buttonStackView.pinRight(to: newView, Constants.sideSpacing + 10)
         buttonStackView.pinLeft(to: newView, Constants.sideSpacing + 10)
@@ -107,20 +118,9 @@ final class ViewController: UIViewController {
         addToButtonStackView(view: menuButton)
     }
     
-    private func setupMenuStackView() {
-        menuView.addSubview(menuStackView)
-        menuStackView.pinUp(to: menuView, 120)
-        menuStackView.pinLeft(to: menuView, Constants.sideSpacing)
-        menuStackView.pinRight(to: menuView, Constants.sideSpacing)
-        menuStackView.pinDown(to: menuView, 90)
-        menuStackView.axis = .vertical
-        menuStackView.distribution = .equalSpacing
-        menuStackView.tintColor = .mainColor
-        
-        addToMenuStackView(view: createMenuButton(#selector(settingsButtonAction), "settings", .mainColor))
-    }
-    
+    // MARK: - Create buton
     private func createMenuButton(_ action: Selector, _ imageName: String, _ tintColor: UIColor) -> UIButton {
+        
         let button = UIButton()
         
         button.setHeight(to: Constants.buttonHeight)
@@ -134,29 +134,23 @@ final class ViewController: UIViewController {
         return button
     }
     
-     //  MARK: - Add to menu stack view
-    private func addToMenuStackView(view: UIView) {
-        menuStackView.addArrangedSubview(view)
-        
-        view.pinLeft(to: menuStackView)
-        view.pinRight(to: menuStackView)
-    }
-    
-     //  MARK: - Add to stack view
+    //  MARK: - Add to stack view
     private func addToButtonStackView(view: UIView) {
+        
         buttonStackView.addArrangedSubview(view)
         
         view.pinUp(to: buttonStackView)
         view.pinDown(to: buttonStackView)
     }
     
-    // MARK: - CollectionView setup
+    // MARK: - CollectionView set up
     private func setupCollectionView() {
+        
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        
         view.addSubview(collectionView)
+
         collectionView.alwaysBounceVertical = true
-        refreshControl.addTarget(self, action: #selector(refreshNewsPage), for: .valueChanged)
-        refreshControl.tintColor = .mainColor
         collectionView.addSubview(refreshControl)
         collectionView.delegate = self
         collectionView.dataSource = self
@@ -170,16 +164,32 @@ final class ViewController: UIViewController {
         } else {
             collectionView.pinUp(to: view)
         }
+        
         collectionView.pinDown(to: newView.topAnchor)
         collectionView.pinLeft(to: view)
         collectionView.pinRight(to: view)
+        
+        refreshControl.addTarget(self, action: #selector(refreshNewsPage), for: .valueChanged)
+        refreshControl.tintColor = .mainColor
 
         self.newsCollectionView = collectionView
         view.bringSubviewToFront(menuView)
         view.bringSubviewToFront(newView)
     }
     
+   // MARK: - Fetch news
+    private func fetchFreshNews(_ page: Int, _ rubric: Rubrics) {
+        
+        articleManager.pageIndex = page
+        articleManager.rubric = rubric
+        let url = getURL(index: page, rubric: rubric.rawValue)
+        articleManager.updateNewsList(url: url)
+    }
+    
+    // MARK: - Actions
+    
     @objc private func settingsButtonAction() {
+        
         UIView.animate(withDuration: 0.3, animations: {
             self.settingsButton.transform = self.settingsButton.transform.rotated(by: CGFloat.pi)
         }, completion: {(finished: Bool) in
@@ -192,36 +202,35 @@ final class ViewController: UIViewController {
     }
     
     @objc private func refreshNewsPage() {
+        
         if !articleManager.isLoading {
             articleManager.isLoading = true
             fetchFreshNews(1, articleManager.rubric)
         }
     }
     
-    private func fetchFreshNews(_ page: Int, _ rubric: Rubrics) {
-        articleManager.pageIndex = page
-        articleManager.rubric = rubric
-        let url = getURL(index: page, rubric: rubric.rawValue)
-        articleManager.updateNewsList(url: url)
-    }
-    
+    // MARK: - StatusBar style
     override var preferredStatusBarStyle: UIStatusBarStyle {
+        
         return .lightContent
     }
 }
 
 // MARK: - CollectionView
-extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource {
+
+extension ViewController: UICollectionViewDelegate {
     
     struct Cells {
         static let newsCell = "ArticleCell"
     }
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
+        
         return 2
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        
         switch section {
         case 0:
             return articleManager.articleArray.count
@@ -230,7 +239,31 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource {
         }
     }
     
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        let webVC = WebViewController()
+        webVC.loadURL(url: articleManager.articleArray[indexPath.row].seldonURL)
+        self.present(webVC, animated: true, completion: nil)
+    }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        
+        let offsetY = scrollView.contentOffset.y
+        let contentHeight = scrollView.contentSize.height
+        
+        if offsetY > contentHeight - scrollView.frame.height - 800 {
+            if !articleManager.isLoading {
+                articleManager.updateNewsList()
+            }
+        }
+    }
+}
+
+// MARK: - UICollectionViewDataSource
+
+extension ViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
         switch indexPath.section {
         case 0:
             let newsCell = collectionView.dequeueReusableCell(withReuseIdentifier: Cells.newsCell, for: indexPath) as! NewsCell
@@ -250,31 +283,16 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource {
             return collectionView.dequeueReusableCell(withReuseIdentifier: "\(UICollectionViewCell.self)", for: indexPath)
         }
     }
-    
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let webVC = WebViewController()
-        webVC.loadURL(url: articleManager.articleArray[indexPath.row].seldonURL)
-        self.present(webVC, animated: true, completion: nil)
-    }
-    
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        let offsetY = scrollView.contentOffset.y
-        let contentHeight = scrollView.contentSize.height
-        
-        if offsetY > contentHeight - scrollView.frame.height - 800 {
-            if !articleManager.isLoading {
-                articleManager.updateNewsList()
-            }
-        }
-    }
 }
 
 // MARK: - UICollectionViewDelegateFlowLayout
+
 extension ViewController: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         sizeForItemAt indexPath: IndexPath) -> CGSize {
+        
         switch indexPath.section {
         case 0:
             return CGSize(width: collectionView.bounds.width, height: 280)
@@ -288,6 +306,7 @@ extension ViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         insetForSectionAt section: Int) -> UIEdgeInsets {
+        
         switch section {
         case 0:
             return UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
@@ -301,27 +320,31 @@ extension ViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        
         return 0
     }
 
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        
         return 0
     }
 }
 
 // MARK: - RefrshDelegate
+
 extension ViewController: RefreshDelegate {
     func refresh() {
+        
         DispatchQueue.main.sync {
             refreshNewsCollection()
             refreshControl.endRefreshing()
-            articleManager.isLoading = false
         }
     }
     
     func refreshNewsCollection() {
+        
         newsCollectionView.reloadData()
     }
 }

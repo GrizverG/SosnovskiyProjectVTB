@@ -11,17 +11,26 @@ import Foundation
 
 fileprivate var requestID = ""
 
-// #MARK: ArticleList
+// MARK: - ArticleList
+
 public struct ArticleList: Decodable {
+    
+    // MARK: - Properties
+    
     var items: [Article]
     var requestId: String
     
+    // MARK: - Coding keys
+
     enum CodingKeys: String, CodingKey {
         case items = "news"
         case requestId
     }
     
+    // MARK: - Article List init
+    
     public init (from decoder: Decoder) throws {
+        
         let container = try decoder.container(keyedBy: CodingKeys.self)
         self.requestId = try container.decode(String.self, forKey: .requestId)
         self.items = try container.decode([Article].self, forKey: .items)
@@ -30,8 +39,12 @@ public struct ArticleList: Decodable {
     }
 }
 
-// #MARK: Article
+// MARK: - Article
+
 struct Article: Decodable {
+    
+    // MARK: - Properties
+    
     var newsID: Int = 0
     var timeToRead: String? = ""
     var sourceName: String? = ""
@@ -50,6 +63,7 @@ struct Article: Decodable {
         case url
     }
     
+    // MARK: - Coding keys
     enum CodingKeys: String, CodingKey {
         case newsId
         case header = "title"
@@ -60,8 +74,9 @@ struct Article: Decodable {
         case img
     }
     
-    // #MARK: Article init
+    // MARK: - Article init
     init(from decoder: Decoder) throws {
+        
         let container = try decoder.container(keyedBy: CodingKeys.self)
         let newsID = try container.decode(Int.self, forKey: .newsId)
         let header = try container.decode(String?.self, forKey: .header)
@@ -84,12 +99,14 @@ struct Article: Decodable {
     }
     
     private func prepareHeader(_ header: String) -> String {
+        
         let title = header.replacingOccurrences(of: "<b>", with: "")
         return title.replacingOccurrences(of: "</b>", with: "")
     }
     
-    // #TODO: Change language of the date
+    // TODO: - Change language of the date
     private func preparePublicationDate(_ date: String) -> String {
+        
         let dateFormatter = DateFormatter()
         let preparedDate = date.split(separator: ".")
         let date = preparedDate[0].description
@@ -100,6 +117,7 @@ struct Article: Decodable {
     }
     
     private func loadImage() -> UIImage? {
+        
         if let data = try? Data(contentsOf: imageURL.url) {
             if let receivedImage = UIImage(data: data) {
                 return receivedImage
@@ -109,7 +127,8 @@ struct Article: Decodable {
     }
 }
 
-// #MARK: ImageURL
+// MARK: - ImageURL
+
 struct ImageURL: Codable {
     var url: URL
     

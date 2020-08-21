@@ -11,6 +11,7 @@ import UIKit
 class UIGradient: UIView {
     
     override func layoutSubviews() {
+        
         let gradient = CAGradientLayer()
         gradient.frame.size = bounds.size
         gradient.startPoint = CGPoint(x: 0.0, y: 1.0)

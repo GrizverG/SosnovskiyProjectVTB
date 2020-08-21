@@ -12,12 +12,9 @@ import Foundation
 final class NewsCell: UICollectionViewCell {
     
     // MARK: - Constants
-    private var newsImageView = UIImageView()
+    
     private let newsHeaderLabel = UILabel()
     private let descriptionLabel = UILabel()
-    private var gradientView = UIGradient()
-    private var stackView = UIStackView()
-    private var infoView = UIView()
     
     static let identifier: String = "ArticleCell"
     
@@ -25,6 +22,14 @@ final class NewsCell: UICollectionViewCell {
         static let headerFont = UIFont.systemFont(ofSize: 16, weight: .bold)
         static let descriptionFont = UIFont.systemFont(ofSize: 14, weight: .medium)
     }
+    
+    // MARK: - Properties
+    
+    private var newsImageView = UIImageView()
+    private var infoView = UIView()
+    private var gradientView = UIGradient()
+    private var stackView = UIStackView()
+
 
     lazy var width: NSLayoutConstraint = {
         let width = contentView.widthAnchor.constraint(equalToConstant: bounds.size.width)
@@ -33,7 +38,9 @@ final class NewsCell: UICollectionViewCell {
     }()
     
     // MARK: - NewsCell init
+    
     override init(frame: CGRect) {
+        
         super.init(frame: frame)
 
         contentView.translatesAutoresizingMaskIntoConstraints = false
@@ -44,10 +51,13 @@ final class NewsCell: UICollectionViewCell {
     }
 
     required init?(coder aDecoder: NSCoder) {
+        
         fatalError("init(coder:) has not been implemented")
     }
     
+    // MARK: - Load cell
     private func loadCell() {
+        
         newsImageView.removeFromSuperview()
         infoView.removeFromSuperview()
         gradientView.removeFromSuperview()
@@ -61,8 +71,9 @@ final class NewsCell: UICollectionViewCell {
         setupLabel(label: descriptionLabel, font: Constants.descriptionFont, .white)
     }
     
-    // Mark setup cell
+    // MARK: - Cell set up
     func set(article: Article) {
+        
         newsImageView.image = article.image
         newsHeaderLabel.text = article.header
         descriptionLabel.text = article.announce

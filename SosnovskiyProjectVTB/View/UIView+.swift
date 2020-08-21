@@ -9,6 +9,8 @@
 import UIKit
 
 extension UIView {
+    
+    // MARK: - Pin methods 
     func pin(to superView: UIView, _ const: Int? = nil) {
         translatesAutoresizingMaskIntoConstraints = false
         let constant = const == nil ? 0 : CGFloat(const!)

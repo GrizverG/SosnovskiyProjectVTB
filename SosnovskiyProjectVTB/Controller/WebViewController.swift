@@ -9,11 +9,24 @@
 import UIKit
 import WebKit
 
+//MARK: - WebViewController
+
 final class WebViewController: UIViewController {
+    
+    //MARK: - Constants
+    
     private let webView = WKWebView()
     
+    // MARK: - Properties
+    
+    private var newsURL: URL?
+    
+    // MARK: - Life cycle
+    
     override func viewDidLoad() {
+        
         let menuView = DragerView()
+        
         view.addSubview(menuView)
         menuView.pinLeft(to: view)
         menuView.pinRight(to: view)
@@ -26,11 +39,18 @@ final class WebViewController: UIViewController {
         webView.pinLeft(to: view)
     }
     
+    // MARK: - Methods
+    
     func loadURL(url: URL) {
+        
+        newsURL = url
         webView.load(URLRequest(url: url))
     }
     
+    // MARK: - Actions
+    
     @objc private func closeWebView() {
+        
         self.dismiss(animated: true, completion: nil)
     }
 }
